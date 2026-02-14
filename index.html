@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For Boo chan 🫶🏻❤️</title>
+
+<style>
+body {
+  margin: 0;
+  background: linear-gradient(to bottom right, #ff758c, #ffb199);
+  font-family: Arial, sans-serif;
+  text-align: center;
+  overflow: hidden;
+  color: white;
+}
+
+#intro {
+  font-size: 40px;
+  margin-top: 30vh;
+  text-shadow: 0 0 20px #fff;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px #fff; }
+  to { text-shadow: 0 0 30px #ffdde1; }
+}
+
+button {
+  padding: 15px 30px;
+  font-size: 18px;
+  margin: 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#yesBtn {
+  background-color: #ff4d6d;
+  color: white;
+}
+
+#noBtn {
+  background-color: white;
+  color: black;
+}
+
+.slide {
+  width: 80%;
+  max-height: 400px;
+  display: none;
+  margin-top: 20px;
+  border-radius: 15px;
+}
+
+#dateQuestion {
+  display: none;
+  font-size: 28px;
+  margin-top: 30px;
+  animation: fadeIn 3s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.heart {
+  position: absolute;
+  color: white;
+  animation: float 4s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-600px); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="intro">For Boo chan 🫶🏻❤️</h1>
+
+<button id="yesBtn" onclick="startLove()">YES</button>
+<button id="noBtn" onclick="moveNo()">NO</button>
+
+<br>
+
+<img src="us1.jpg" class="slide">
+<img src="us2.jpg" class="slide">
+<img src="us3.jpg" class="slide">
+
+<div id="dateQuestion">
+Would you go on a date with me on 17/02/2026? ❤️
+</div>
+
+<audio id="bgMusic" src="love.mp3" loop></audio>
+
+<script>
+
+let slides = document.getElementsByClassName("slide");
+let current = 0;
+
+function startLove() {
+
+  // play music
+  let music = document.getElementById("bgMusic");
+  music.volume = 0.4;
+  music.play();
+
+  // hide intro & buttons
+  document.getElementById("intro").style.display = "none";
+  document.getElementById("yesBtn").style.display = "none";
+  document.getElementById("noBtn").style.display = "none";
+
+  launchConfetti();
+  floatHearts();
+  showSlides();
+
+  setTimeout(() => {
+    document.getElementById("dateQuestion").style.display = "block";
+  }, 9000);
+}
+
+function showSlides() {
+  slides[current].style.display = "block";
+
+  setInterval(() => {
+    slides[current].style.display = "none";
+    current = (current + 1) % slides.length;
+    slides[current].style.display = "block";
+  }, 3000);
+}
+
+function moveNo() {
+  let btn = document.getElementById("noBtn");
+  btn.style.position = "absolute";
+  btn.style.left = Math.random() * window.innerWidth + "px";
+  btn.style.top = Math.random() * window.innerHeight + "px";
+}
+
+function launchConfetti() {
+  for(let i = 0; i < 80; i++) {
+    let conf = document.createElement("div");
+    conf.style.position = "absolute";
+    conf.style.width = "8px";
+    conf.style.height = "8px";
+    conf.style.background = "white";
+    conf.style.left = Math.random() * window.innerWidth + "px";
+    conf.style.top = "-10px";
+    conf.style.animation = "fall 3s linear";
+    document.body.appendChild(conf);
+  }
+}
+
+function floatHearts() {
+  setInterval(() => {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.top = "90vh";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 4000);
+
+  }, 500);
+}
+
+</script>
+
+</body>
+</html>
